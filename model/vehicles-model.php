@@ -139,11 +139,22 @@ function deleteVehicle($invId) {
 
 function getVehiclesByClassification($classificationName){
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $sql = 'SELECT * FROM inventory WHERE inventory.classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
     $stmt->execute();
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach($vehicles as &$vehicle){
+        $invId = $vehicle['invId'];
+        $sql = 'SELECT * FROM images WHERE invId=:invId AND imgPrimary = 1';
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
+        $stmt->execute();
+        $image = $stmt->fetch();
+        $vehicle["imgPath"] = $image["imgPath"];
+    }
+
     $stmt->closeCursor();
     return $vehicles;
 }
@@ -154,9 +165,20 @@ function getCarsInfo($invId){
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
     $stmt->execute();
-    $cars = $stmt->fetch(PDO::FETCH_ASSOC);
+    $car = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $invId = $car['invId'];
+    $sql = 'SELECT * FROM images WHERE invId=:invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
+    $stmt->execute();
+    $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $car["images"] = $images;
+
+
+
     $stmt->closeCursor();
-    return $cars;
+    return $car;
 }
 
 function getVehicles() {

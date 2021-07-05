@@ -43,8 +43,9 @@ function buildVehiclesDisplay($vehicles){
     foreach ($vehicles as $vehicle) {
     $price = number_format($vehicle['invPrice'], 0);
 
+
      $dv .= '<li>';
-     $dv .= "<a href='/phpmotors/vehicles/?action=detail&invId=$vehicle[invId]'><img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+     $dv .= '<a href="/phpmotors/vehicles/?action=detail&invId='.$vehicle['invId'].'"><img src="'.$vehicle['imgPath'].'" alt="Image of '.$vehicle['invMake'].' '.$vehicle['invModel'].' on phpmotors.com">';
      $dv .= '<hr>';
      $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
      $dv .= "<span>$ $price</span><br><br>";
@@ -60,7 +61,13 @@ function buildCarsDisplay($cars) {
 
     $dc = '<div id="car-display">';
     $dc .= "<div>";
-    $dc .= "<img src='$cars[invImage]' alt='Image of $cars[invMake] $cars[invModel] on phpmotors.com'>";
+
+
+
+    foreach($cars["images"] as $car_image){
+        $dc .= "<img src='".$car_image[imgPath]."' alt='Image of $car[invMake] $car[invModel] on phpmotors.com'>";
+    }
+
     $dc .= "<h1>Price : $ $price</h1>";
 
     $dc .= "</div>";
