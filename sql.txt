@@ -1,0 +1,8 @@
+//for updating the clientLevel of client with id of 1
+UPDATE `clients` SET `clientLevel`= 3 WHERE clientId = 1
+
+//for deleting a client with an id
+DELETE FROM `clients` WHERE clientId = 1
+
+//for creating a client 
+INSERT INTO `clients`(`clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `comment`) VALUES ('john','samson','johnSamson@gmail.com','patrick123','it\'s a wonderfulplan')

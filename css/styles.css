@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css?family=Stardos+Stencil");
+@import url("https://fonts.googleapis.com/css?family=Boogaloo");
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Stardos Stencil", cursive;
+  margin: 0;
+  padding: 0; }
+
+  h1 {
+      font-size: 2vw;
+  }
+body {
+  font-family: "Boogaloo", cursive; 
+  font-size: 14px;
+}
+
+  *{
+    margin: 0;
+    padding:0;
+    font-family: 'Roboto Condensed', sans-serif;
+    scroll-behavior:smooth;
+  }
+
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+ }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  margin: 0;
+  background: url('../images/site/checkerboard.jpg');
+}
+
+#container {
+  background-color: #ffffff;
+  margin: 0 auto 50px auto;
+  max-width: 720px; }
+
+main {
+    background: #fff;
+    width: 85vw;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.covered {
+    padding: 30px !important;
+}
+
+
+  .header-top {
+      height: 60px;
+      line-height: 60px;
+  }
+
+  .header-top img {
+      float: left;
+      width: 80%;
+  }
+
+  .topLink {
+      float: right;
+      width: 20%;
+      padding: 20px;
+      line-height: 40px;
+      text-align: end;
+  }
+
+  a, .topLink a {
+      text-decoration: none;
+      color: #333;
+  }
+
+
+  nav{
+    width:100%;
+    height:50px;
+    background:#3a3a3a;
+    text-transform:uppercase;
+    color:#fff;
+    z-index:4;
+  }
+
+  nav ul li.active {
+    background: #4c96d7;
+  }
+  
+  nav ul, .menu-active ul{
+    display:block;
+    width:100%;
+  } 
+  
+  nav ul li, .menu-active ul li{
+    display:inline-block;
+    float:left;
+    width:100px;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+  }
+  
+  nav ul li a{
+    display:block;
+    text-decoration:none;
+    color:#fff;
+    width:100%;
+    height:100%;
+  }
+  
+  nav ul li:hover{
+    background:#4c96d7;
+  }
+  .container{
+    line-height:0;
+  }
+  
+  section{
+    display:inline-block;
+    width:100%;
+    max-height:100vh;
+  }
+  
+ .mast_head {
+     font-size: medium;
+    color: #1169b6;
+    width: 100%;
+    min-height: 500px;
+    margin-bottom: 30px;
+    padding: 40px;
+    background-size: cover;
+    background: #fff url('../images/delorean.jpg');
+    background-repeat: no-repeat;
+    background-position: center right;
+ }
+
+ .btn_bg {
+     display: inline-block;
+     background: url('../images/site/own_today.png');
+     background-repeat: no-repeat;
+     background-size: contain;
+     width: 120px;
+     height: 40px;
+     margin-top: 30px;
+    border: none;
+ }
+
+
+
+.dmc_section {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .dmc_section-left {
+      margin-bottom: 20px;
+    padding: 20px;
+    flex: 50%;
+  }
+  
+  .dmc_section-right {
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 20px;
+    flex: 50%;
+  }
+
+  .dmc_section_1_img {
+      background: #4c96d7;
+      border: 1px solid #555;
+      text-align: center;
+      height: 90px;
+      line-height: 90px;
+      padding-top: 10px;
+  }
+
+  .dmc_section_1_ul {
+      list-style: none;
+  }
+
+  .dmc_section_1_ul li {
+      float: left;
+      width: 48%;
+      height: 120px;
+      margin-right: 5px;
+      text-align: center;
+  }
+
+
+  .dmc_section_2_ul {
+    list-style: disc;
+}
+
+  .dmc_section_2_ul li{
+    float: left;
+    width: 100%;
+  }
+
+
+  @media (max-width: 800px) {
+    .dmc_section {
+      flex-direction: column;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    .mast_head {
+        padding: 10px;
+        background-size: contain;
+        margin-top: 0px;
+        min-height: 280px;
+        margin-bottom: 30px;
+    }
+
+    .btn_bg {
+        margin-top: 49%;
+        vertical-align: middle;
+        margin-left: 30%;
+    }
+    main {
+        width: 100%;
+        padding: 0px;
+    }
+
+    nav ul li, .menu-active ul li {
+        display: inline-block;
+        width: 60px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .header-top img {
+        width: 60%;
+    }
+    .topLink {
+        width: 40%;
+        padding: 10px 0;
+        line-height: 50px;
+        text-align: center;
+    }
+  }
+  
+ footer {
+     border-top: 3px solid #333;
+     padding-top: 20px;
+     text-align: center;
+ }
+
+
+
+
+form {
+    margin: 15px 0%;;
+}
+
+select{
+    margin: 15px 0%;
+}
+
+label, input{
+    display: block;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, textarea{
+    margin-bottom: 15px;
+    border: 1px solid #f2f2f2;
+}
+
+
+
+
+
+form, #notamember{
+    padding: 0 15px;
+}
+
+
+.btn-primary {
+    /* margin-top: 15px; */
+    background-color: #22649e;
+    border: none;
+    text-decoration: none;
+    color: white;
+    padding: 8px 20px;
+    /* margin: 20px 20px; */
+    cursor: pointer;
+}
+
+/* My account link on header */
+#account{
+    text-decoration: none;
+    margin: 0% 15px;
+}
+
+.padding-auto {
+  padding: 20px;
+}
+
