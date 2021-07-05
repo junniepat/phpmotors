@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Host: 127.0.0.1
+-- Generation Time: Jul 05, 2021 at 08:13 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,26 +21,105 @@ SET time_zone = "+00:00";
 -- Database: `phpmotors`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carclassification`
+--
+
+CREATE TABLE `carclassification` (
+  `classificationId` int(11) NOT NULL,
+  `classificationName` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `carclassification`
+--
+
+INSERT INTO `carclassification` (`classificationId`, `classificationName`) VALUES
+(1, 'SUV'),
+(2, 'Classic'),
+(3, 'Sports'),
+(4, 'Trucks'),
+(5, 'Used');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients`
+--
+
+CREATE TABLE `clients` (
+  `clientId` int(10) UNSIGNED NOT NULL,
+  `clientFirstname` varchar(15) NOT NULL,
+  `clientLastname` varchar(25) NOT NULL,
+  `clientEmail` varchar(40) NOT NULL,
+  `clientPassword` varchar(255) NOT NULL,
+  `clientLevel` enum('1','2','3') NOT NULL DEFAULT '1',
+  `comment` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`clientId`, `clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `clientLevel`, `comment`) VALUES
+(1, 'Patrick', 'Igwe', 'patrickoigwe@gmail.com', '$2y$10$1KXZYCCup6RA2Qjvq4W6jO3203Y7wbwI/TVLWyQCNbYLLFf.LzeOS', '1', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `imgId` int(10) UNSIGNED NOT NULL,
+  `invId` int(10) UNSIGNED NOT NULL,
+  `imgName` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `imgPath` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `imgDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `imgPrimary` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`imgId`, `invId`, `imgName`, `imgPath`, `imgDate`, `imgPrimary`) VALUES
+(0, 11, 'aerocar.jpg', '/phpmotors/images/vehicles/aerocar.jpg', '2021-07-04 19:58:30', 1),
+(0, 11, 'aerocar-tn.jpg', '/phpmotors/images/vehicles/aerocar-tn.jpg', '2021-07-04 19:58:30', 1),
+(0, 6, 'batmobile.jpg', '/phpmotors/images/vehicles/batmobile.jpg', '2021-07-04 20:01:18', 1),
+(0, 6, 'batmobile-tn.jpg', '/phpmotors/images/vehicles/batmobile-tn.jpg', '2021-07-04 20:01:18', 1),
+(0, 11, 'escalade.jpg', '/phpmotors/images/vehicles/escalade.jpg', '2021-07-04 20:01:35', 1),
+(0, 11, 'escalade-tn.jpg', '/phpmotors/images/vehicles/escalade-tn.jpg', '2021-07-04 20:01:35', 1),
+(0, 15, 'delorean.jpg', '/phpmotors/images/vehicles/delorean.jpg', '2021-07-04 20:03:56', 1),
+(0, 15, 'delorean-tn.jpg', '/phpmotors/images/vehicles/delorean-tn.jpg', '2021-07-04 20:03:56', 1),
+(0, 2, 'model-t.jpg', '/phpmotors/images/vehicles/model-t.jpg', '2021-07-04 20:06:45', 1),
+(0, 2, 'model-t-tn.jpg', '/phpmotors/images/vehicles/model-t-tn.jpg', '2021-07-04 20:06:45', 1);
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `inventory`
 --
-DROP TABLE IF EXISTS `inventory`;
+
 CREATE TABLE `inventory` (
-  `invId` int UNSIGNED NOT NULL,
+  `invId` int(10) UNSIGNED NOT NULL,
   `invMake` varchar(30) NOT NULL,
   `invModel` varchar(30) NOT NULL,
   `invDescription` text NOT NULL,
   `invImage` varchar(50) NOT NULL,
   `invThumbnail` varchar(50) NOT NULL,
   `invPrice` decimal(10,0) NOT NULL,
-  `invStock` smallint NOT NULL,
+  `invStock` smallint(6) NOT NULL,
   `invColor` varchar(20) NOT NULL,
-  `classificationId` int NOT NULL
+  `classificationId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inventory`
 --
+
 INSERT INTO `inventory` (`invId`, `invMake`, `invModel`, `invDescription`, `invImage`, `invThumbnail`, `invPrice`, `invStock`, `invColor`, `classificationId`) VALUES
 (1, 'Jeep ', 'Wrangler', 'The Jeep Wrangler is small and compact with enough power to get you where you want to go. Its great for everyday driving as well as offroading weather that be on the the rocks or in the mud!', '/images/jeep-wrangler.jpg', '/images/jeep-wrangler-tn.jpg', '28045', 4, 'Orange', 1),
 (2, 'Ford', 'Model T', 'The Ford Model T can be a bit tricky to drive. It was the first car to be put into production. You can get it in any color you want as long as it\'s black.', '/images/ford-modelt.jpg', '/images/ford-modelt-tn.jpg', '30000', 2, 'Black', 2),
@@ -59,6 +138,22 @@ INSERT INTO `inventory` (`invId`, `invMake`, `invModel`, `invDescription`, `invI
 (15, 'Dog ', 'Car', 'Do you like dogs? Well this car is for you straight from the 90s from Aspen, Colorado we have the orginal Dog Car complete with fluffy ears.  ', '/images/dog.jpg', '/images/dog-tn.jpg', '35000', 1, 'Brown', 2);
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `carclassification`
+--
+ALTER TABLE `carclassification`
+  ADD PRIMARY KEY (`classificationId`);
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`clientId`);
+
+--
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
@@ -66,78 +161,31 @@ ALTER TABLE `inventory`
   ADD KEY `classificationId` (`classificationId`);
 
 --
--- AUTO_INCREMENT for table `inventory`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `inventory`
-  MODIFY `invId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-  
---
--- Table structure for table `carclassification`
---
-DROP TABLE IF EXISTS `carclassification`;
-CREATE TABLE `carclassification` (
-  `classificationId` int NOT NULL,
-  `classificationName` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `carclassification`
---
-INSERT INTO `carclassification` (`classificationId`, `classificationName`) VALUES
-(1, 'SUV'),
-(2, 'Classic'),
-(3, 'Sports'),
-(4, 'Trucks'),
-(5, 'Used');
-
---
--- Indexes for table `carclassification`
---
-ALTER TABLE `carclassification`
-  ADD PRIMARY KEY (`classificationId`);
-  
 --
 -- AUTO_INCREMENT for table `carclassification`
 --
 ALTER TABLE `carclassification`
-  MODIFY `classificationId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-  
+  MODIFY `classificationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
 --
 -- Constraints for table `inventory`
 --
 ALTER TABLE `inventory`
   ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`classificationId`) REFERENCES `carclassification` (`classificationId`);
 COMMIT;
-
---
--- Table structure for table `clients`
---
-DROP TABLE IF EXISTS `clients`;
-CREATE TABLE `clients` (
-  `clientId` int UNSIGNED NOT NULL,
-  `clientFirstname` varchar(15) NOT NULL,
-  `clientLastname` varchar(25) NOT NULL,
-  `clientEmail` varchar(40) NOT NULL,
-  `clientPassword` varchar(255) NOT NULL,
-  `clientLevel` enum('1','2','3') NOT NULL DEFAULT '1',
-  `comment` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`clientId`);
-  
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-MODIFY `clientId` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
-
-  
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
